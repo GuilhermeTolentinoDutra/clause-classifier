@@ -1,0 +1,12 @@
+{
+  "accuracy": 0.0,
+  "f1_macro": 0.0,
+  "f1_weighted": 0.0,
+  "n_train": 159,
+  "n_test": 41,
+  "n_classes": 41,
+  "model_name": "nlpaueb/legal-bert-base-uncased",
+  "epochs": 1,
+  "max_samples": 200,
+  "device": "cpu"
+}
