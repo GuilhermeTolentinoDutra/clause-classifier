@@ -11,7 +11,7 @@ A Fase 1 foi publicada no GitHub como um pipeline completo e funcional. A Fase 2
 | Fase | Descrição | Status |
 |---|---|---|
 | 1 | Walking skeleton: dataset CUAD + baseline TF-IDF/LogReg + demo | ✅ Concluída |
-| 2 | Fine-tuning de Legal-BERT (EN) | Em preparação |
+| 2 | Fine-tuning de Legal-BERT (EN) | Primeiro experimento concluído |
 | 3 | Benchmark comparativo com LLMs (zero-shot) | Planejada |
 | 4 | Explicabilidade (SHAP/LIME) | Planejada |
 | 5 | Extensão para português (Legal-BERTimbau + LGPD) | Planejada |
@@ -77,7 +77,22 @@ python src/train_legal_bert.py --max-samples 0 --epochs 3
 
 O smoke test já foi executado com sucesso em CPU. O modelo Legal-BERT (~110M parâmetros) é baixado do Hugging Face na primeira execução; os pesos gerados são mantidos localmente e ignorados pelo Git.
 
+## Modelo Legal-BERT — Fase 2 (primeiro experimento)
+
+Foi executada uma época de fine-tuning de `nlpaueb/legal-bert-base-uncased` sobre as mesmas 10.524 cláusulas de treino e 2.631 cláusulas de teste usadas no baseline, inteiramente em CPU.
+
+| Métrica | Baseline TF-IDF/LogReg | Legal-BERT | Variação |
+|---|---:|---:|---:|
+| Acurácia | 74,69% | **80,88%** | +6,20 p.p. |
+| F1 macro | 0,6291 | **0,6576** | +2,84 p.p. |
+| F1 weighted | 0,7480 | **0,7906** | +4,26 p.p. |
+
+O resultado é promissor: mesmo com apenas uma época, o Legal-BERT melhora as três métricas, inclusive o F1 macro, que é mais sensível às classes raras. A inferência também foi validada após o salvamento do modelo: uma cláusula de lei aplicável foi classificada como `Governing Law` com 98,06% de confiança.
+
+Os números completos da comparação estão em `reports/phase2_comparison.json`. O modelo treinado localmente (~419 MB) é ignorado pelo Git; o pipeline permite reproduzir o treinamento com `src/train_legal_bert.py`.
+
 ## Estrutura do projeto
+
 ```
 clause-classifier/
 ├── src/

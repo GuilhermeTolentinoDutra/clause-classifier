@@ -1,0 +1,28 @@
+{
+  "baseline": {
+    "accuracy": 0.7468643101482326,
+    "f1_macro": 0.6291433380892185,
+    "f1_weighted": 0.7479730699070372,
+    "epochs": null,
+    "device": "cpu"
+  },
+  "legal_bert": {
+    "accuracy": 0.8088179399467883,
+    "f1_macro": 0.6575546395496912,
+    "f1_weighted": 0.7906066601792706,
+    "epochs": 1,
+    "device": "cpu",
+    "model_name": "nlpaueb/legal-bert-base-uncased"
+  },
+  "delta_legal_bert_minus_baseline": {
+    "accuracy": 0.06195362979855572,
+    "f1_macro": 0.0284113014604727,
+    "f1_weighted": 0.0426335902722333
+  },
+  "evaluation": {
+    "n_train": 10524,
+    "n_test": 2631,
+    "n_classes": 41,
+    "same_split_as_baseline": true
+  }
+}
