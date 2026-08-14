@@ -1,0 +1,32 @@
+# Virtual environments
+.venv/
+venv/
+c-classifier/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter runtime files
+.ipynb_checkpoints/
+
+# OS metadata
+*:Zone.Identifier
+.DS_Store
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Build and tool artifacts
+build/
+dist/
+*.egg-info/
+
+# Local experiment caches
+.cache/
+mlruns/
