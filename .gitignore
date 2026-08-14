@@ -30,3 +30,4 @@ dist/
 # Local experiment caches
 .cache/
 mlruns/
+data/processed/legal_bert/

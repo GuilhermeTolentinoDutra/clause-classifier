@@ -4,14 +4,14 @@ Projeto de portfólio na interseção **Direito + Machine Learning**. Classifica
 
 > Este é um artefato educacional/portfólio, **não** uma ferramenta de aconselhamento jurídico e não deve ser usado em produção sem validação adicional.
 
-## Status atual: Fase 1 concluída (Nível técnico 1/4)
+## Status atual: Fase 1 concluída e Fase 2 em preparação (Nível técnico 1/4 → 2/4)
 
-Este é o "walking skeleton" do roadmap: um pipeline completo e funcional, do dado bruto até uma demo interativa, usando o modelo mais simples possível (baseline interpretável). As próximas fases substituem o modelo por versões mais sofisticadas sem alterar a experiência da demo.
+A Fase 1 foi publicada no GitHub como um pipeline completo e funcional. A Fase 2 agora possui um pipeline de fine-tuning de Legal-BERT configurável para CPU. Como este computador não possui GPU, o treinamento completo deve ser executado com parâmetros conservadores e pode levar bastante tempo; o smoke test usa 200 amostras e uma época.
 
 | Fase | Descrição | Status |
 |---|---|---|
 | 1 | Walking skeleton: dataset CUAD + baseline TF-IDF/LogReg + demo | ✅ Concluída |
-| 2 | Fine-tuning de Legal-BERT (EN) | Próxima |
+| 2 | Fine-tuning de Legal-BERT (EN) | Em preparação |
 | 3 | Benchmark comparativo com LLMs (zero-shot) | Planejada |
 | 4 | Explicabilidade (SHAP/LIME) | Planejada |
 | 5 | Extensão para português (Legal-BERTimbau + LGPD) | Planejada |
@@ -54,6 +54,18 @@ python src/eda.py               # gera a análise exploratória em reports/
 python src/train_baseline.py    # treina o baseline e salva o modelo em data/processed/
 streamlit run app/demo_app.py   # abre a demo em http://localhost:8501
 ```
+
+### Fase 2 — Legal-BERT em CPU
+
+```bash
+# Smoke test rápido (modelo pré-treinado + 200 amostras)
+python src/train_legal_bert.py --max-samples 200 --epochs 1
+
+# Treinamento completo; pode levar bastante tempo sem GPU
+python src/train_legal_bert.py --max-samples 0 --epochs 3
+```
+
+O smoke test já foi executado com sucesso em CPU. O modelo Legal-BERT (~110M parâmetros) é baixado do Hugging Face na primeira execução; os pesos gerados são mantidos localmente e ignorados pelo Git.
 
 ## Estrutura do projeto
 ```
