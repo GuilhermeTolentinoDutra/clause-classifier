@@ -55,6 +55,16 @@ python src/train_baseline.py    # treina o baseline e salva o modelo em data/pro
 streamlit run app/demo_app.py   # abre a demo em http://localhost:8501
 ```
 
+### Testes
+
+Com o ambiente virtual ativado, o comando oficial de testes é:
+
+```bash
+python -m pytest
+```
+
+A configuração em `pyproject.toml` descobre automaticamente os testes em `tests/` e inclui a raiz do projeto no `PYTHONPATH`. No ambiente atual, o resultado verificado é `3 passed`.
+
 ### Fase 2 — Legal-BERT em CPU
 
 ```bash
