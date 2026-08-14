@@ -85,7 +85,11 @@ def main(argv=None):
     # sem instalar o stack de deep learning.
     import torch
     from torch.utils.data import DataLoader, Dataset
-    from transformers import AutoModelForSequenceClassification, AutoTokenizer
+    from transformers import (
+        AutoConfig,
+        AutoModelForSequenceClassification,
+        AutoTokenizer,
+    )
 
     df = pd.read_csv(DATA_PATH)
     train_df, test_df, label_to_id = prepare_data(df, args.max_samples, args.seed)
@@ -111,11 +115,13 @@ def main(argv=None):
 
     train_loader = DataLoader(ClauseDataset(train_df), batch_size=args.batch_size, shuffle=True)
     test_loader = DataLoader(ClauseDataset(test_df), batch_size=args.batch_size)
+    config = AutoConfig.from_pretrained(args.model_name)
+    config.num_labels = len(label_to_id)
+    config.id2label = id_to_label
+    config.label2id = label_to_id
     model = AutoModelForSequenceClassification.from_pretrained(
-        args.model_name, num_labels=len(label_to_id), ignore_mismatched_sizes=True
+        args.model_name, config=config, ignore_mismatched_sizes=True
     )
-    model.config.id2label = id_to_label
-    model.config.label2id = label_to_id
     device = torch.device("cpu")
     model.to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)

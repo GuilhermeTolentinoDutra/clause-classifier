@@ -1,7 +1,7 @@
 {
-  "accuracy": 0.0,
-  "f1_macro": 0.0,
-  "f1_weighted": 0.0,
+  "accuracy": 0.0975609756097561,
+  "f1_macro": 0.011544011544011544,
+  "f1_weighted": 0.04645760743321719,
   "n_train": 159,
   "n_test": 41,
   "n_classes": 41,
